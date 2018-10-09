@@ -12,8 +12,14 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.uic.hcilab.emoca.TestFragments.Test_m;
+import edu.uic.hcilab.emoca.TestFragments.Test_n1;
+import edu.uic.hcilab.emoca.TestFragments.Test_n2;
+import edu.uic.hcilab.emoca.TestFragments.Test_n3;
 import edu.uic.hcilab.emoca.TestFragments.Test_start;
 import edu.uic.hcilab.emoca.TestFragments.Test_v1;
+import edu.uic.hcilab.emoca.TestFragments.Test_v2;
+import edu.uic.hcilab.emoca.TestFragments.Test_v3;
 
 public class MocaActivity extends TabHost {
 
@@ -41,6 +47,12 @@ public class MocaActivity extends TabHost {
 
         fragmentList.add(new Test_start());
         fragmentList.add(new Test_v1());
+        fragmentList.add(new Test_v2());
+        fragmentList.add(new Test_v3());
+        fragmentList.add(new Test_n1());
+        fragmentList.add(new Test_n2());
+        fragmentList.add(new Test_n3());
+        fragmentList.add(new Test_m());
 
         pb.setMax(fragmentList.size());
 

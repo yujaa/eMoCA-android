@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TestFragments.Test_m">
+
+    <!-- TODO: Update blank fragment layout -->
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/m_inst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This is a memory test.
+    \nI am going to read a list of words that you will have to remember now and later on.
+    \nListen carefully.
+    \nWhen I am through, write as many words as you can remember.
+    \nIt doesn’t matter in what order you write them."
+                android:textColor="#000000"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/m_alert"
+                android:layout_width="match_parent"
+                android:layout_height="133dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="50dp"
+                android:text="Listen Carefully."
+                android:textAlignment="center"
+                android:textColor="#FF0000"
+                android:textSize="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/m_inst" />
+    </android.support.constraint.ConstraintLayout>
+
+
+</FrameLayout>

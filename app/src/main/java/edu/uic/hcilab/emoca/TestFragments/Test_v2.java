@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,23 +16,16 @@ import android.widget.FrameLayout;
 import edu.uic.hcilab.emoca.AudioPlayer;
 import edu.uic.hcilab.emoca.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Test_v1.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Test_v1#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Test_v1 extends android.app.Fragment {
-    Test_v1.DrawingView dv ;
+public class Test_v2 extends android.app.Fragment {
+
+    DrawingView dv ;
     AudioPlayer ap = new AudioPlayer();
-    Paint mPaint;
+    private Paint mPaint;
 
-
-    public Test_v1() {
+    public Test_v2() {
         // Required empty public constructor
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +35,9 @@ public class Test_v1 extends android.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_test_v1, container, false);
-        dv = new Test_v1.DrawingView(getActivity());
-        FrameLayout v = (FrameLayout) view.findViewById(R.id.v1_canvas);
+        View view = inflater.inflate(R.layout.fragment_test_v2, container, false);
+        dv = new DrawingView(getActivity());
+        FrameLayout v = (FrameLayout) view.findViewById(R.id.v2_canvas);
         v.addView(dv);
 
         mPaint = new Paint();
@@ -58,12 +50,12 @@ public class Test_v1 extends android.app.Fragment {
         mPaint.setStrokeWidth(8);
 
         //audio
-        View[] viewArr = {view.findViewById(R.id.v1_circ_start), view.findViewById(R.id.v1_arrow1), view.findViewById(R.id.v1_arrow2), view.findViewById(R.id.v1_circ_end)};
-        int[] startTimeArr = {5500, 7000, 8000, 11000};
-        int[] endTimeArr = {8000, 8500, 9500, 12000};
-        ap.audioAnimationPlayer(this.getActivity().getApplicationContext(), R.raw.v1, viewArr, startTimeArr, endTimeArr);
+        View[] viewArr = {view.findViewById(R.id.v2_rect)};
+        int[] startTimeArr = {500};
+        int[] endTimeArr = {1500};
+        ap.audioAnimationPlayer(this.getActivity().getApplicationContext(), R.raw.v2, viewArr, startTimeArr, endTimeArr);
 
-        return view;
+        return view;//inflater.inflate(R.layout.fragment_test__q5, container, false);
     }
 
     public class DrawingView extends View {
