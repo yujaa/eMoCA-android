@@ -15,7 +15,8 @@ import java.io.File;
 
 public class AudioPlayer {
 
-    public void audioPlayer(Context context, int rawId){
+    public int stop = 0;
+    public void audioPlayer(final Context context, int rawId){
         //set up MediaPlayer
         MediaPlayer mp = MediaPlayer.create(context, rawId);
 
@@ -25,6 +26,14 @@ public class AudioPlayer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+            }
+
+        });
+
     }
 
     public void audioAnimationPlayer(Context context, int rawId, final View[] viewArr, int[] startTimeArr, int[] endTimeArr){
@@ -66,4 +75,6 @@ public class AudioPlayer {
             e.printStackTrace();
         }
     }
+
 }
+

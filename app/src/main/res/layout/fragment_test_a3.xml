@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TestFragments.Test_a3">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/n1_ins"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="25dp"
+            android:text="Tell me the name of this animal."
+            android:textColor="#000000"
+            android:textSize="20dp"
+        />
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

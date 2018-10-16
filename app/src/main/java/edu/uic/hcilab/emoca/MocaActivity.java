@@ -54,6 +54,7 @@ public class MocaActivity extends TabHost {
         fragmentList.add(new Test_n3());
         fragmentList.add(new Test_m());
 
+
         pb.setMax(fragmentList.size());
 
         if (savedInstanceState == null) {

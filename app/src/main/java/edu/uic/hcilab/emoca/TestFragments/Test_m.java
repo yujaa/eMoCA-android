@@ -11,24 +11,22 @@ import android.view.ViewGroup;
 import edu.uic.hcilab.emoca.AudioPlayer;
 import edu.uic.hcilab.emoca.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Test_m.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Test_m#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Test_m extends Fragment {
+public class Test_m extends android.app.Fragment {
     AudioPlayer ap = new AudioPlayer();
+    volatile int stop =0;
+    View[] viewArr = new View[5];
     public Test_m() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ap.audioPlayer(this.getActivity().getApplicationContext(), R.raw.n);
+    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);
+
+        int[] startTimeArr = {0};
+        int[] endTimeArr = {1000};
+
+        stop =1;
+        ap.audioPlayer(this.getActivity().getApplicationContext(), R.raw.m_inst);
 
     }
 
@@ -36,6 +34,14 @@ public class Test_m extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test_m, container, false);
+        View view = inflater.inflate(R.layout.fragment_test_m, container, false);
+        viewArr[0] = view.findViewById(R.id.m_alert);
+
+        return view;
     }
+
+    public void onAudioCallback(){
+        stop = 0;
+    }
+
 }

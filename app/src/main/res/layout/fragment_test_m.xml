@@ -34,6 +34,7 @@
                 android:textAlignment="center"
                 android:textColor="#FF0000"
                 android:textSize="40dp"
+                android:alpha="0.0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/m_inst" />
     </android.support.constraint.ConstraintLayout>
