@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import edu.uic.hcilab.emoca.AudioPlayer;
 import edu.uic.hcilab.emoca.R;
 
-public class Test_m extends android.app.Fragment {
+public class Test_m extends android.app.Fragment implements AudioPlayer.AudioCallback {
     AudioPlayer ap = new AudioPlayer();
-    volatile int stop =0;
+    int audioNum = 0;
     View[] viewArr = new View[5];
     public Test_m() {
         // Required empty public constructor
@@ -25,8 +25,7 @@ public class Test_m extends android.app.Fragment {
         int[] startTimeArr = {0};
         int[] endTimeArr = {1000};
 
-        stop =1;
-        ap.audioPlayer(this.getActivity().getApplicationContext(), R.raw.m_inst);
+        ap.audioPlayer(this.getActivity().getApplicationContext(),this.getContext(), R.raw.m_inst);
 
     }
 
@@ -41,7 +40,9 @@ public class Test_m extends android.app.Fragment {
     }
 
     public void onAudioCallback(){
-        stop = 0;
+        if(audioNum == 0)
+            ap.audioPlayer(this.getActivity().getApplicationContext(), R.raw.m);
+
     }
 
 }

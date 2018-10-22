@@ -19,7 +19,19 @@ public class AudioPlayer {
     public void audioPlayer(final Context context, int rawId){
         //set up MediaPlayer
         MediaPlayer mp = MediaPlayer.create(context, rawId);
+        try {
+            //mp.setDataSource(path + File.separator + fileName);
+            mp.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    public void audioPlayer(final Context context, Context fragContext, int rawId){
+        //set up MediaPlayer
+        MediaPlayer mp = MediaPlayer.create(context, rawId);
+        final AudioCallback mCallback = (AudioCallback)fragContext;
         try {
             //mp.setDataSource(path + File.separator + fileName);
             mp.start();
@@ -30,6 +42,7 @@ public class AudioPlayer {
 
             @Override
             public void onCompletion(MediaPlayer mp) {
+                mCallback.onAudioCallback();
             }
 
         });
@@ -74,6 +87,11 @@ public class AudioPlayer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public interface AudioCallback
+    {
+        public void onAudioCallback();
     }
 
 }
