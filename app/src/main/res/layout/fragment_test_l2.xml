@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TestFragments.Test_a1">
+    tools:context=".TestFragments.Test_a2">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -13,15 +13,15 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/a1_inst"
+            android:id="@+id/l2_inst"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="I am going to say some numbers and when I am through, repeat them to me exactly as I said them."
+            android:text="Now I am going to read you another sentence. Repeat it after me, exactly as I say it"
             android:textColor="#000000"
             android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/a1_alert"
+            android:id="@+id/l2_alert"
             android:layout_width="match_parent"
             android:layout_height="133dp"
             android:layout_marginBottom="8dp"
@@ -32,35 +32,37 @@
             android:textColor="#FF0000"
             android:textSize="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/a1_inst" />
+            app:layout_constraintTop_toBottomOf="@+id/l2_inst" />
 
         <Button
-            android:id="@+id/a1_button"
+            android:id="@+id/l2_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:alpha="0.0"
             android:text="Button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.925"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/a1_alert"
-            app:layout_constraintVertical_bias="0.254" />
+            app:layout_constraintTop_toBottomOf="@+id/l2_alert"
+            app:layout_constraintVertical_bias="0.669" />
 
         <EditText
-            android:id="@+id/a1_text"
-            android:layout_width="wrap_content"
+            android:id="@+id/l2_text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="88dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/l2_alert" />
 
 
     </android.support.constraint.ConstraintLayout>
