@@ -19,7 +19,7 @@ import edu.uic.hcilab.emoca.R;
 public class Test_v2 extends android.app.Fragment {
 
     DrawingView dv ;
-    AudioPlayer ap = new AudioPlayer();
+    AudioPlayer ap;
     private Paint mPaint;
 
     public Test_v2() {
@@ -29,6 +29,7 @@ public class Test_v2 extends android.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ap = new AudioPlayer(this.getActivity().getApplicationContext());
     }
 
     @Override
@@ -53,9 +54,15 @@ public class Test_v2 extends android.app.Fragment {
         View[] viewArr = {view.findViewById(R.id.v2_rect)};
         int[] startTimeArr = {500};
         int[] endTimeArr = {1500};
-        ap.audioAnimationPlayer(this.getActivity().getApplicationContext(), R.raw.v2, viewArr, startTimeArr, endTimeArr);
+        ap.audioAnimationPlayer(R.raw.v2, viewArr, startTimeArr, endTimeArr);
 
         return view;//inflater.inflate(R.layout.fragment_test__q5, container, false);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ap.stop();
     }
 
     public class DrawingView extends View {

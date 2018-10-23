@@ -21,32 +21,33 @@ import edu.uic.hcilab.emoca.R;
 
 import static android.app.Activity.RESULT_OK;
 
-public class Test_a1 extends android.app.Fragment {
+public class Test_l2 extends android.app.Fragment {
     AudioPlayer ap;
     int audioNum = 0;
     View[] viewArr = new View[5];
     int[] startTimeArr = {0};
     int[] endTimeArr = {3000};
 
-    public Test_a1() {
+    public Test_l2() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         ap = new AudioPlayer(this.getActivity().getApplicationContext());
-        ap.audioPlayer(R.raw.a1_inst, mCallback);
+        ap.audioPlayer(R.raw.l2_inst, mCallback);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_test_a1, container, false);
-        viewArr[0] = view.findViewById(R.id.a1_alert);
-        viewArr[1] = view.findViewById(R.id.a1_button);
-        viewArr[2] = view.findViewById(R.id.a1_text);
+        View view = inflater.inflate(R.layout.fragment_test_l2, container, false);
+        viewArr[0] = view.findViewById(R.id.l2_alert);
+        viewArr[1] = view.findViewById(R.id.l2_button);
+        viewArr[2] = view.findViewById(R.id.l2_text);
 
         viewArr[1].setOnClickListener(new View.OnClickListener() {
 
@@ -64,20 +65,20 @@ public class Test_a1 extends android.app.Fragment {
         ap.stop();
     }
 
+
     AudioPlayer.AudioCallback mCallback = new AudioPlayer.AudioCallback(){
         @Override
         public void onAudioCallback() {
             switch(audioNum){
                 case 0:
                     ((TextView)viewArr[0]).setText("Listen Carefully.");
-                    ap.audioAnimationPlayer(R.raw.a1, viewArr, startTimeArr, endTimeArr, mCallback);
+                    ap.audioAnimationPlayer(R.raw.l2, viewArr, startTimeArr, endTimeArr, mCallback);
                     audioNum = 1;
                     break;
 
                 case 1:
-                    ((TextView)viewArr[0]).setText("Press Button when you are ready to answer.");
+                    ((TextView)viewArr[0]).setText("Press the Button when you are ready to answer.");
                     ((TextView)viewArr[0]).setAlpha(1.0f);
-                    ((Button)viewArr[1]).setAlpha(1.0f);
 
                     audioNum = 2;
                     break;
@@ -95,7 +96,7 @@ public class Test_a1 extends android.app.Fragment {
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-                "Say numbers");
+                "Say the answer");
         try {
             startActivityForResult(intent, 100);
         } catch (ActivityNotFoundException a) {

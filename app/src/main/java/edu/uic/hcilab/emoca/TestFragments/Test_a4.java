@@ -21,14 +21,14 @@ import edu.uic.hcilab.emoca.R;
 
 import static android.app.Activity.RESULT_OK;
 
-public class Test_a1 extends android.app.Fragment {
+public class Test_a4 extends android.app.Fragment {
     AudioPlayer ap;
     int audioNum = 0;
     View[] viewArr = new View[5];
     int[] startTimeArr = {0};
     int[] endTimeArr = {3000};
 
-    public Test_a1() {
+    public Test_a4() {
         // Required empty public constructor
     }
 
@@ -36,17 +36,15 @@ public class Test_a1 extends android.app.Fragment {
     public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);
 
         ap = new AudioPlayer(this.getActivity().getApplicationContext());
-        ap.audioPlayer(R.raw.a1_inst, mCallback);
+        ap.audioPlayer(R.raw.a4_inst, mCallback);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_test_a1, container, false);
-        viewArr[0] = view.findViewById(R.id.a1_alert);
-        viewArr[1] = view.findViewById(R.id.a1_button);
-        viewArr[2] = view.findViewById(R.id.a1_text);
+        View view = inflater.inflate(R.layout.fragment_test_a4, container, false);
+        viewArr[1] = view.findViewById(R.id.a4_button);
 
         viewArr[1].setOnClickListener(new View.OnClickListener() {
 
@@ -64,19 +62,13 @@ public class Test_a1 extends android.app.Fragment {
         ap.stop();
     }
 
+
     AudioPlayer.AudioCallback mCallback = new AudioPlayer.AudioCallback(){
         @Override
         public void onAudioCallback() {
             switch(audioNum){
-                case 0:
-                    ((TextView)viewArr[0]).setText("Listen Carefully.");
-                    ap.audioAnimationPlayer(R.raw.a1, viewArr, startTimeArr, endTimeArr, mCallback);
-                    audioNum = 1;
-                    break;
 
-                case 1:
-                    ((TextView)viewArr[0]).setText("Press Button when you are ready to answer.");
-                    ((TextView)viewArr[0]).setAlpha(1.0f);
+                case 0:
                     ((Button)viewArr[1]).setAlpha(1.0f);
 
                     audioNum = 2;

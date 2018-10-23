@@ -18,7 +18,7 @@ import edu.uic.hcilab.emoca.R;
 
 public class Test_n1 extends android.app.Fragment {
 
-    AudioPlayer ap = new AudioPlayer();
+    AudioPlayer ap;
     public Test_n1() {
         // Required empty public constructor
     }
@@ -26,7 +26,8 @@ public class Test_n1 extends android.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ap.audioPlayer(this.getActivity().getApplicationContext(), R.raw.n);
+        ap = new AudioPlayer(this.getActivity().getApplicationContext());
+        ap.audioPlayer(R.raw.n);
     }
 
     @Override
@@ -35,4 +36,11 @@ public class Test_n1 extends android.app.Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_test_n1, container, false);
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ap.stop();
+    }
+
 }
