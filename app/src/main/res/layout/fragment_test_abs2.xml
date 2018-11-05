@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TestFragments.Test_l3">
+    tools:context=".TestFragments.Test_abs2">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -13,34 +13,15 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/l3_inst"
+            android:id="@+id/abs2_inst"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tell me as many words as
-you can think of that begin with a certain letter of the alphabet that I will tell you in a moment. You
-can say any kind of word you want, except for proper nouns (like Bob or Boston), numbers, or words
-that begin with the same sound but have a different suffix, for example, love, lover, loving. I will tell
-you to stop after one minute. Are you ready?"
+            android:text="Tell me another way in which those items are alike."
             android:textColor="#000000"
             android:textSize="25dp" />
 
-        <TextView
-            android:id="@+id/l3_alert"
-            android:layout_width="match_parent"
-            android:layout_height="133dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:alpha="0.0"
-            android:text="Now, tell me as many words as you can think of
-that begin with the letter F, after click the Button."
-            android:textAlignment="center"
-            android:textColor="#FF0000"
-            android:textSize="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/l3_inst" />
-
         <Button
-            android:id="@+id/l3_button"
+            android:id="@+id/abs2_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -51,11 +32,11 @@ that begin with the letter F, after click the Button."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/l3_alert"
+            app:layout_constraintTop_toBottomOf="@+id/abs2_inst"
             app:layout_constraintVertical_bias="0.669" />
 
         <EditText
-            android:id="@+id/l3_text"
+            android:id="@+id/abs2_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="88dp"
@@ -67,7 +48,7 @@ that begin with the letter F, after click the Button."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/l3_alert" />
+            app:layout_constraintTop_toBottomOf="@+id/abs2_inst" />
 
 
     </android.support.constraint.ConstraintLayout>

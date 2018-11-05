@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -28,6 +27,10 @@ import edu.uic.hcilab.emoca.TestFragments.Test_a1;
 import edu.uic.hcilab.emoca.TestFragments.Test_a2;
 import edu.uic.hcilab.emoca.TestFragments.Test_a3;
 import edu.uic.hcilab.emoca.TestFragments.Test_a4;
+import edu.uic.hcilab.emoca.TestFragments.Test_abs1;
+import edu.uic.hcilab.emoca.TestFragments.Test_abs2;
+import edu.uic.hcilab.emoca.TestFragments.Test_abs3;
+import edu.uic.hcilab.emoca.TestFragments.Test_abs4;
 import edu.uic.hcilab.emoca.TestFragments.Test_l1;
 import edu.uic.hcilab.emoca.TestFragments.Test_l2;
 import edu.uic.hcilab.emoca.TestFragments.Test_l3;
@@ -89,6 +92,10 @@ public class MocaActivity extends TabHost {
         fragmentList.add(new Test_l1());
         fragmentList.add(new Test_l2());
         fragmentList.add(new Test_l3());
+        fragmentList.add(new Test_abs1());
+        fragmentList.add(new Test_abs2());
+        fragmentList.add(new Test_abs3());
+        fragmentList.add(new Test_abs4());
 
         pb.setMax(fragmentList.size());
 
