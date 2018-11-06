@@ -13,11 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
 import edu.uic.hcilab.emoca.AudioPlayer;
 import edu.uic.hcilab.emoca.R;
+import edu.uic.hcilab.emoca.SpeechRecognition;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -28,6 +31,9 @@ public class Test_a4 extends android.app.Fragment {
     int[] startTimeArr = {0};
     int[] endTimeArr = {3000};
 
+    SpeechRecognition sr;
+    private Button toggleReco;
+
     public Test_a4() {
         // Required empty public constructor
     }
@@ -37,6 +43,12 @@ public class Test_a4 extends android.app.Fragment {
 
         ap = new AudioPlayer(this.getActivity().getApplicationContext());
         ap.audioPlayer(R.raw.a4_inst, mCallback);
+
+        sr = new SpeechRecognition(2);
+        sr.sessionInit(this.getActivity().getApplicationContext());
+        sr.loadEarcons(this.getActivity().getApplicationContext());
+
+        sr.setState(1);
     }
 
     @Override
@@ -44,13 +56,20 @@ public class Test_a4 extends android.app.Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_test_a4, container, false);
-        viewArr[1] = view.findViewById(R.id.a4_button);
 
-        viewArr[1].setOnClickListener(new View.OnClickListener() {
+        TextView ansArr[] ={(TextView)view.findViewById(R.id.a4_ans1), (TextView)view.findViewById(R.id.a4_ans2),
+                (TextView)view.findViewById(R.id.a4_ans3), (TextView)view.findViewById(R.id.a4_ans4),
+                (TextView)view.findViewById(R.id.a4_ans5), (TextView)view.findViewById(R.id.a4_ans6)};
 
+        sr.setTextViews(ansArr, (TextView)view.findViewById(R.id.a4_log));
+        toggleReco = (Button)view.findViewById(R.id.a4_toggle_reco);
+        toggleReco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                askSpeechInput();
+                if(v == toggleReco) {
+                    sr.toggleReco();
+
+                }
             }
         });
         return view;
@@ -69,8 +88,6 @@ public class Test_a4 extends android.app.Fragment {
             switch(audioNum){
 
                 case 0:
-                    ((Button)viewArr[1]).setAlpha(1.0f);
-
                     audioNum = 2;
                     break;
 
@@ -78,41 +95,4 @@ public class Test_a4 extends android.app.Fragment {
         }
 
     };
-
-    // Showing google speech input dialog
-
-    private void askSpeechInput() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-                "Say numbers");
-        try {
-            startActivityForResult(intent, 100);
-        } catch (ActivityNotFoundException a) {
-
-        }
-    }
-
-    // Receiving speech input
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case 100: {
-                if (resultCode == RESULT_OK && null != data) {
-
-                    ArrayList<String> result = data
-                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    ((TextView)viewArr[2]).setText(result.get(0));
-                }
-                break;
-            }
-
-        }
-    }
-
 }

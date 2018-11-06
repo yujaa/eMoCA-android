@@ -1,5 +1,6 @@
 package edu.uic.hcilab.emoca;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.widget.TextView;
 
@@ -20,6 +21,10 @@ public class SpeechRecognition {
     private Audio errorEarcon;
 
     private TextView result;
+
+    private TextView[] results={};
+    private int next = 0;
+
     private TextView logs;
 
     private Session speechSession;
@@ -82,7 +87,10 @@ public class SpeechRecognition {
         @Override
         public void onRecognition(Transaction transaction, Recognition recognition) {
             //logs.append("\nonRecognition: " + recognition.getText());
-            result.setText(recognition.getText());
+            if(results.length !=0)
+                results[next++].setBackgroundColor(0x1DDB1600);
+            else
+                result.setText(recognition.getText());
             //We have received a transcription of the users voice from the server.
         }
 
@@ -179,6 +187,12 @@ public class SpeechRecognition {
     {
         this.logs = logs;
         this.result = result;
+    }
+
+    public void setTextViews(TextView[] result, TextView logs)
+    {
+        this.logs = logs;
+        this.results = result;
     }
 
     /**

@@ -55,8 +55,7 @@ public class Test_a1 extends android.app.Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_test_a1, container, false);
         viewArr[0] = view.findViewById(R.id.a1_alert);
-        viewArr[1] = view.findViewById(R.id.a1_toggle_reco);
-        viewArr[2] = view.findViewById(R.id.a1_ans);
+        viewArr[1] = view.findViewById(R.id.a1_ans);
 
         sr.setTextViews((TextView)view.findViewById(R.id.a1_ans), (TextView)view.findViewById(R.id.a1_log));
         toggleReco = (Button)view.findViewById(R.id.a1_toggle_reco);
@@ -90,7 +89,7 @@ public class Test_a1 extends android.app.Fragment {
                 case 1:
                     ((TextView)viewArr[0]).setText("Press Button when you are ready to answer.");
                     ((TextView)viewArr[0]).setAlpha(1.0f);
-                    ((Button)viewArr[1]).setBackgroundResource(R.drawable.recording);
+                    ((Button)toggleReco).setBackgroundResource(R.drawable.recording);
 
                     audioNum = 2;
                     break;
@@ -128,7 +127,7 @@ public class Test_a1 extends android.app.Fragment {
 
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    ((TextView)viewArr[2]).setText(result.get(0));
+                    ((TextView)viewArr[1]).setText(result.get(0));
                 }
                 break;
             }

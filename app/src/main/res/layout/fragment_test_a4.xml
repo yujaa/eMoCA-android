@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <TextView
             android:id="@+id/a4_inst"
             android:layout_width="match_parent"
@@ -20,6 +21,77 @@
             android:textColor="#000000"
             android:textSize="25dp" />
 
+        <EditText
+            android:id="@+id/a4_ans5"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:background="#BBBBBB"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toEndOf="@+id/a4_ans4"
+            app:layout_constraintTop_toBottomOf="@+id/a4_ans2" />
+
+        <EditText
+            android:id="@+id/a4_ans6"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:background="#BBBBBB"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toEndOf="@+id/a4_ans5"
+            app:layout_constraintTop_toBottomOf="@+id/a4_ans3" />
+
+        <EditText
+            android:id="@+id/a4_ans4"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="32dp"
+            android:background="#BBBBBB"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/a4_ans1" />
+
+        <EditText
+            android:id="@+id/a4_ans3"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="50dp"
+            android:background="#BBBBBB"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toEndOf="@+id/a4_ans2"
+            app:layout_constraintTop_toBottomOf="@+id/a4_inst" />
+
+        <EditText
+            android:id="@+id/a4_ans2"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="50dp"
+            android:background="#BBBBBB"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toEndOf="@+id/a4_ans1"
+            app:layout_constraintTop_toBottomOf="@+id/a4_inst" />
+
+        <EditText
+            android:id="@+id/a4_ans1"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="50dp"
+            android:background="#BBBBBB"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/a4_inst" />
 
         <TextView
             android:id="@+id/a4_alert"
@@ -30,28 +102,16 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:alpha="0.0"
-            android:text="Listen Carefully."
+            android:text="Speak one number each time you press the record button."
             android:textAlignment="center"
             android:textColor="#FF0000"
             android:textSize="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/a4_inst"
-            app:layout_constraintVertical_bias="0.24" />
+            app:layout_constraintTop_toBottomOf="@+id/a4_ans5"
+            app:layout_constraintVertical_bias="0.19" />
 
-        <EditText
-            android:id="@+id/a4_ans"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/a4_alert" />
 
         <Button
             android:id="@+id/a4_toggle_reco"
@@ -60,7 +120,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:background="@drawable/recording_d"
+            android:background="@drawable/recording"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -75,8 +135,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/a4_toggle_reco"
             app:layout_constraintTop_toTopOf="@+id/a4_toggle_reco" />
-
-
 
 
     </android.support.constraint.ConstraintLayout>

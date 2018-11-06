@@ -19,12 +19,15 @@
             android:text="I am going to read you a sentence. Repeat it after me, exactly as I say it."
             android:textColor="#000000"
             android:textSize="25dp" />
+        
 
         <TextView
             android:id="@+id/l1_alert"
             android:layout_width="match_parent"
             android:layout_height="133dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:alpha="0.0"
             android:text="Listen Carefully."
@@ -32,37 +35,46 @@
             android:textColor="#FF0000"
             android:textSize="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/l1_inst" />
-
-        <Button
-            android:id="@+id/l1_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/l1_alert"
-            app:layout_constraintVertical_bias="0.669" />
+            app:layout_constraintTop_toBottomOf="@+id/l1_inst"
+            app:layout_constraintVertical_bias="0.24" />
 
         <EditText
-            android:id="@+id/l1_text"
+            android:id="@+id/l1_ans"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="88dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/l1_alert" />
+
+        <Button
+            android:id="@+id/l1_toggle_reco"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/recording_d"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/l1_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/l1_toggle_reco"
+            app:layout_constraintTop_toTopOf="@+id/l1_toggle_reco" />
 
 
     </android.support.constraint.ConstraintLayout>
