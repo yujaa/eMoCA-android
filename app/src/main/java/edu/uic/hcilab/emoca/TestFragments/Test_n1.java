@@ -39,7 +39,7 @@ public class Test_n1 extends android.app.Fragment {
         ap = new AudioPlayer(this.getActivity().getApplicationContext());
         ap.audioPlayer(R.raw.n);
 
-        sr = new SpeechRecognition();
+        sr = new SpeechRecognition(1);
         sr.sessionInit(this.getActivity().getApplicationContext());
         sr.loadEarcons(this.getActivity().getApplicationContext());
 

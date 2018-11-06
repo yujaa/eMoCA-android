@@ -18,6 +18,7 @@ import java.util.Locale;
 
 import edu.uic.hcilab.emoca.AudioPlayer;
 import edu.uic.hcilab.emoca.R;
+import edu.uic.hcilab.emoca.SpeechRecognition;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -28,6 +29,9 @@ public class Test_a2 extends android.app.Fragment {
     int[] startTimeArr = {0};
     int[] endTimeArr = {3000};
 
+    SpeechRecognition sr;
+    private Button toggleReco;
+
     public Test_a2() {
         // Required empty public constructor
     }
@@ -37,6 +41,12 @@ public class Test_a2 extends android.app.Fragment {
 
         ap = new AudioPlayer(this.getActivity().getApplicationContext());
         ap.audioPlayer(R.raw.a2_inst, mCallback);
+
+        sr = new SpeechRecognition(2);
+        sr.sessionInit(this.getActivity().getApplicationContext());
+        sr.loadEarcons(this.getActivity().getApplicationContext());
+
+        sr.setState(1);
     }
 
     @Override
@@ -45,14 +55,17 @@ public class Test_a2 extends android.app.Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_test_a2, container, false);
         viewArr[0] = view.findViewById(R.id.a2_alert);
-        viewArr[1] = view.findViewById(R.id.a2_button);
-        viewArr[2] = view.findViewById(R.id.a2_text);
+        viewArr[1] = view.findViewById(R.id.a2_toggle_reco);
+        viewArr[2] = view.findViewById(R.id.a2_ans);
 
-        viewArr[1].setOnClickListener(new View.OnClickListener() {
-
+        sr.setTextViews((TextView)view.findViewById(R.id.a1_ans), (TextView)view.findViewById(R.id.a1_log));
+        toggleReco = (Button)view.findViewById(R.id.a1_toggle_reco);
+        toggleReco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                askSpeechInput();
+                if(v == toggleReco) {
+                    sr.toggleReco();
+                }
             }
         });
         return view;
@@ -78,7 +91,7 @@ public class Test_a2 extends android.app.Fragment {
                 case 1:
                     ((TextView)viewArr[0]).setText("Press Button when you are ready to answer.");
                     ((TextView)viewArr[0]).setAlpha(1.0f);
-                    ((Button)viewArr[1]).setAlpha(1.0f);
+                    ((Button)viewArr[1]).setBackgroundResource(R.drawable.recording);
 
                     audioNum = 2;
                     break;

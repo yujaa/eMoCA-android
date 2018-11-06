@@ -25,27 +25,12 @@ public class SpeechRecognition {
     private Session speechSession;
     private Transaction recoTransaction;
     private State state = State.IDLE;
+    private int detectiontype;
 
     /* Reco transactions */
-
-    public void toggleReco() {
-        switch (state) {
-            case IDLE:
-                recognize();
-                break;
-            case LISTENING:
-                stopRecording();
-                break;
-            case PROCESSING:
-                cancel();
-                break;
-        }
-    }
-
-    public void setTextViews(TextView result, TextView logs)
+    public SpeechRecognition(int type)
     {
-        this.logs = logs;
-        this.result = result;
+        detectiontype = type;
     }
 
     /**
@@ -55,8 +40,14 @@ public class SpeechRecognition {
         //Setup our Reco transaction options.
 
         Transaction.Options options = new Transaction.Options();
-        //options.setDetection(DetectionType.Long);
-        options.setDetection(DetectionType.Short);
+        switch(detectiontype){
+            case 1:
+                options.setDetection(DetectionType.Short);
+                break;
+            case 2:
+                options.setDetection(DetectionType.Long);
+                break;
+        }
         options.setRecognitionType(RecognitionType.DICTATION);
         options.setLanguage(new Language("eng-USA"));
         options.setEarcons(startEarcon, stopEarcon, errorEarcon, null);
@@ -70,7 +61,7 @@ public class SpeechRecognition {
     private Transaction.Listener recoListener = new Transaction.Listener() {
         @Override
         public void onStartedRecording(Transaction transaction) {
-            logs.setText("Speak the answer");
+            logs.setText("Speak answer");
 
             //We have started recording the users voice.
             //We should update our state and start polling their volume.
@@ -167,6 +158,27 @@ public class SpeechRecognition {
         IDLE,
         LISTENING,
         PROCESSING
+    }
+
+
+    public void toggleReco() {
+        switch (state) {
+            case IDLE:
+                recognize();
+                break;
+            case LISTENING:
+                stopRecording();
+                break;
+            case PROCESSING:
+                cancel();
+                break;
+        }
+    }
+
+    public void setTextViews(TextView result, TextView logs)
+    {
+        this.logs = logs;
+        this.result = result;
     }
 
     /**
