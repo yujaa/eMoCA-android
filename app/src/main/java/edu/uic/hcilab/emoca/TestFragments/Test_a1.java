@@ -19,11 +19,13 @@ import java.util.Locale;
 import edu.uic.hcilab.emoca.AudioPlayer;
 import edu.uic.hcilab.emoca.R;
 import edu.uic.hcilab.emoca.SpeechRecognition;
+import edu.uic.hcilab.emoca.WriteSDcard;
 
 import static android.app.Activity.RESULT_OK;
 
 public class Test_a1 extends android.app.Fragment {
     AudioPlayer ap;
+    WriteSDcard wr;
     int audioNum = 0;
     View[] viewArr = new View[5];
     int[] startTimeArr = {0};
@@ -41,12 +43,14 @@ public class Test_a1 extends android.app.Fragment {
 
         ap = new AudioPlayer(this.getActivity().getApplicationContext());
         ap.audioPlayer(R.raw.a1_inst, mCallback);
+        wr = new WriteSDcard();
 
         sr = new SpeechRecognition(2);
         sr.sessionInit(this.getActivity().getApplicationContext());
         sr.loadEarcons(this.getActivity().getApplicationContext());
-
         sr.setState(1);
+
+        wr.writeToSDFile(this.getContext(), "Start A1 introduction");
     }
 
     @Override

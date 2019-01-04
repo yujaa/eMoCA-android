@@ -44,10 +44,9 @@ import edu.uic.hcilab.emoca.TestFragments.Test_v2;
 import edu.uic.hcilab.emoca.TestFragments.Test_v3;
 
 public class MocaActivity extends TabHost {
-
-
     private List<Fragment> fragmentList = new ArrayList<>();
     int fIndex = 0;
+    WriteSDcard wr;
 
     @Override
     public int getContentViewId() {
@@ -76,6 +75,8 @@ public class MocaActivity extends TabHost {
         final Button nextBtn = (Button) findViewById(R.id.test_next_btn);
         final ProgressBar pb = (ProgressBar) findViewById(R.id.test_progressBar); // initiate the progress bar
         setSupportActionBar(myToolbar);
+
+        wr = new WriteSDcard();
 
         fragmentList.add(new Test_start());
         fragmentList.add(new Test_v1());
@@ -110,7 +111,7 @@ public class MocaActivity extends TabHost {
 
             @Override
             public void onClick(View v) {
-
+                wr.writeToSDFile(MocaActivity.super.getApplicationContext(), ":Next");
                 if (fIndex == 0)
                     nextBtn.setText("Next");
 
@@ -129,39 +130,6 @@ public class MocaActivity extends TabHost {
 
     }
 
-    public void writeToSDFile(String str){
-
-        // Find the root of the external storage.
-        File root = Environment.getExternalStorageDirectory();
-        File dir = new File (root.getAbsolutePath() + "/FLM");
-        File file = new File(dir,"Moca.txt");
-
-        try {
-
-            int permissionCheck = ContextCompat.checkSelfPermission(MocaActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-                if (!file.createNewFile()) {
-                    Log.i("Test", "This file is already exist: " + file.getAbsolutePath());
-                }
-
-            }
-            FileOutputStream f = new FileOutputStream(file, true);
-            Long tsLong = System.currentTimeMillis()/10;
-            String ts = tsLong.toString();
-            PrintWriter pw = new PrintWriter(f);
-            pw.println(str+":"+ts);
-            pw.flush();
-            pw.close();
-            f.close();
-            Log.i("my",str+":"+ts);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            Log.i("myTag", "******* File not found. Did you" +
-                    " add a WRITE_EXTERNAL_STORAGE permission to the   manifest?");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     @TargetApi(23)
     @Override

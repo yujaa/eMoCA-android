@@ -15,11 +15,13 @@ import android.widget.FrameLayout;
 
 import edu.uic.hcilab.emoca.AudioPlayer;
 import edu.uic.hcilab.emoca.R;
+import edu.uic.hcilab.emoca.WriteSDcard;
 
 public class Test_v3 extends android.app.Fragment {
 
     DrawingView dv ;
     AudioPlayer ap;
+    WriteSDcard wr;
     private Paint mPaint;
 
     public Test_v3() {
@@ -30,6 +32,7 @@ public class Test_v3 extends android.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ap = new AudioPlayer(this.getActivity().getApplicationContext());
+        wr = new WriteSDcard();
     }
 
     @Override
@@ -52,7 +55,7 @@ public class Test_v3 extends android.app.Fragment {
 
         //audio
         ap.audioPlayer( R.raw.v3);
-
+        wr.writeToSDFile(this.getContext(), "V3:audio start");
         return view;//inflater.inflate(R.layout.fragment_test__q5, container, false);
     }
 
@@ -108,14 +111,15 @@ public class Test_v3 extends android.app.Fragment {
         private float mX, mY;
         private static final float TOUCH_TOLERANCE = 4;
 
-        private void touch_start(float x, float y) {
+        private void touch_start(float x, float y, int tool, float pressure) {
             mPath.reset();
             mPath.moveTo(x, y);
             mX = x;
             mY = y;
+            wr.writeToSDFile(this.getContext(), "V3:touch down:"+tool+":"+pressure+":"+mX+","+mY);
         }
 
-        private void touch_move(float x, float y) {
+        private void touch_move(float x, float y, int tool, float pressure) {
             float dx = Math.abs(x - mX);
             float dy = Math.abs(y - mY);
             if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
@@ -125,16 +129,19 @@ public class Test_v3 extends android.app.Fragment {
 
                 circlePath.reset();
                 circlePath.addCircle(mX, mY, 30, Path.Direction.CW);
+                wr.writeToSDFile(this.getContext(), "V3:touch move:"+tool+":"+pressure+":"+mX+","+mY);
             }
         }
 
-        private void touch_up() {
+        private void touch_up(int tool, float pressure) {
             mPath.lineTo(mX, mY);
             circlePath.reset();
             // commit the path to our offscreen
             mCanvas.drawPath(mPath,  mPaint);
+
             // kill this so we don't double draw
             mPath.reset();
+            wr.writeToSDFile(this.getContext(), "V3:touch up:"+tool+":"+pressure+":"+mX+","+mY);
         }
 
         @Override
@@ -144,15 +151,15 @@ public class Test_v3 extends android.app.Fragment {
 
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    touch_start(x, y);
+                    touch_start(x, y, event.getToolType(0), event.getPressure(0));
                     invalidate();
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    touch_move(x, y);
+                    touch_move(x, y, event.getToolType(0), event.getPressure(0));
                     invalidate();
                     break;
                 case MotionEvent.ACTION_UP:
-                    touch_up();
+                    touch_up(event.getToolType(0), event.getPressure(0));
                     invalidate();
                     break;
             }

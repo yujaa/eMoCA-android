@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.FrameLayout;
 
 import edu.uic.hcilab.emoca.AudioPlayer;
 import edu.uic.hcilab.emoca.R;
+import edu.uic.hcilab.emoca.WriteSDcard;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +29,7 @@ import edu.uic.hcilab.emoca.R;
  */
 public class Test_v1 extends android.app.Fragment {
     Test_v1.DrawingView dv ;
+    WriteSDcard wr;
     AudioPlayer ap;
     Paint mPaint;
 
@@ -37,7 +40,9 @@ public class Test_v1 extends android.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ap = new AudioPlayer(this.getActivity().getApplicationContext());
+        ap = new AudioPlayer(this.getContext());
+        wr = new WriteSDcard();
+
     }
 
     @Override
@@ -58,12 +63,13 @@ public class Test_v1 extends android.app.Fragment {
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setStrokeWidth(8);
 
+
         //audio
         View[] viewArr = {view.findViewById(R.id.v1_circ_start), view.findViewById(R.id.v1_arrow1), view.findViewById(R.id.v1_arrow2), view.findViewById(R.id.v1_circ_end)};
         int[] startTimeArr = {5500, 7000, 8000, 11000};
         int[] endTimeArr = {8000, 8500, 9500, 12000};
         ap.audioAnimationPlayer(R.raw.v1, viewArr, startTimeArr, endTimeArr);
-
+        wr.writeToSDFile(this.getContext(), "V1:audio start");
         return view;
     }
 
@@ -119,14 +125,15 @@ public class Test_v1 extends android.app.Fragment {
         private float mX, mY;
         private static final float TOUCH_TOLERANCE = 4;
 
-        private void touch_start(float x, float y) {
+        private void touch_start(float x, float y, int tool, float pressure) {
             mPath.reset();
             mPath.moveTo(x, y);
             mX = x;
             mY = y;
+            wr.writeToSDFile(this.getContext(), "V1:touch down:"+tool+":"+pressure+":"+mX+","+mY);
         }
 
-        private void touch_move(float x, float y) {
+        private void touch_move(float x, float y, int tool, float pressure) {
             float dx = Math.abs(x - mX);
             float dy = Math.abs(y - mY);
             if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
@@ -136,16 +143,19 @@ public class Test_v1 extends android.app.Fragment {
 
                 circlePath.reset();
                 circlePath.addCircle(mX, mY, 30, Path.Direction.CW);
+                wr.writeToSDFile(this.getContext(), "V1:touch move:"+tool+":"+pressure+":"+mX+","+mY);
             }
         }
 
-        private void touch_up() {
+        private void touch_up(int tool, float pressure) {
             mPath.lineTo(mX, mY);
             circlePath.reset();
             // commit the path to our offscreen
             mCanvas.drawPath(mPath,  mPaint);
+
             // kill this so we don't double draw
             mPath.reset();
+            wr.writeToSDFile(this.getContext(), "V1:touch up:"+tool+":"+pressure+":"+mX+","+mY);
         }
 
         @Override
@@ -155,15 +165,15 @@ public class Test_v1 extends android.app.Fragment {
 
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    touch_start(x, y);
+                    touch_start(x, y, event.getToolType(0), event.getPressure(0));
                     invalidate();
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    touch_move(x, y);
+                    touch_move(x, y, event.getToolType(0), event.getPressure(0));
                     invalidate();
                     break;
                 case MotionEvent.ACTION_UP:
-                    touch_up();
+                    touch_up(event.getToolType(0), event.getPressure(0));
                     invalidate();
                     break;
             }

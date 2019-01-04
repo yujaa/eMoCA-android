@@ -23,10 +23,12 @@ import org.w3c.dom.Text;
 import edu.uic.hcilab.emoca.AudioPlayer;
 import edu.uic.hcilab.emoca.R;
 import edu.uic.hcilab.emoca.SpeechRecognition;
+import edu.uic.hcilab.emoca.WriteSDcard;
 
 public class Test_n1 extends android.app.Fragment {
 
     AudioPlayer ap;
+    WriteSDcard wr;
     private SpeechRecognition sr;
     private Button toggleReco;
     public Test_n1() {
@@ -36,13 +38,15 @@ public class Test_n1 extends android.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        wr =  new WriteSDcard();
         ap = new AudioPlayer(this.getActivity().getApplicationContext());
         ap.audioPlayer(R.raw.n);
+
+        wr.writeToSDFile(this.getContext(), "N1:audio start");
 
         sr = new SpeechRecognition(1);
         sr.sessionInit(this.getActivity().getApplicationContext());
         sr.loadEarcons(this.getActivity().getApplicationContext());
-
         sr.setState(1);
     }
 
