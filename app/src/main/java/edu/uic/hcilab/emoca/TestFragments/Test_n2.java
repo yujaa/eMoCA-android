@@ -47,7 +47,7 @@ public class Test_n2 extends android.app.Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_test_n2, container, false);
-        sr.setTextViews((TextView)view.findViewById(R.id.n2_ans), (TextView)view.findViewById(R.id.n2_log));
+        sr.setTextViews((TextView)view.findViewById(R.id.n2_ans), (TextView)view.findViewById(R.id.n2_log), getContext());
         toggleReco = (Button)view.findViewById(R.id.n2_toggle_reco);
         toggleReco.setOnClickListener(new View.OnClickListener() {
             @Override

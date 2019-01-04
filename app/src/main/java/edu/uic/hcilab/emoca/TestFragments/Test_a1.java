@@ -61,7 +61,7 @@ public class Test_a1 extends android.app.Fragment {
         viewArr[0] = view.findViewById(R.id.a1_alert);
         viewArr[1] = view.findViewById(R.id.a1_ans);
 
-        sr.setTextViews((TextView)view.findViewById(R.id.a1_ans), (TextView)view.findViewById(R.id.a1_log));
+        sr.setTextViews((TextView)view.findViewById(R.id.a1_ans), (TextView)view.findViewById(R.id.a1_log), getContext());
         toggleReco = (Button)view.findViewById(R.id.a1_toggle_reco);
         toggleReco.setOnClickListener(new View.OnClickListener() {
             @Override

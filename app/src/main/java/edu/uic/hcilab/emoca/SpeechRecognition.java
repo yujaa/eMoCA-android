@@ -2,17 +2,19 @@ package edu.uic.hcilab.emoca;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
+import android.support.annotation.RequiresPermission;
 import android.widget.TextView;
 
 import com.nuance.speechkit.Audio;
 import com.nuance.speechkit.DetectionType;
 import com.nuance.speechkit.Language;
 import com.nuance.speechkit.Recognition;
-import com.nuance.speechkit.ResultDeliveryType;
+
 import com.nuance.speechkit.RecognitionType;
 import com.nuance.speechkit.Session;
 import com.nuance.speechkit.Transaction;
 import com.nuance.speechkit.TransactionException;
+
 
 public class SpeechRecognition {
 
@@ -21,6 +23,7 @@ public class SpeechRecognition {
     private Audio errorEarcon;
 
     private TextView result;
+    private Context context;
 
     private TextView[] results={};
     private int next = 0;
@@ -31,6 +34,8 @@ public class SpeechRecognition {
     private Transaction recoTransaction;
     private State state = State.IDLE;
     private int detectiontype;
+
+    WriteSDcard wr;
 
     /* Reco transactions */
     public SpeechRecognition(int type)
@@ -58,6 +63,8 @@ public class SpeechRecognition {
         options.setEarcons(startEarcon, stopEarcon, errorEarcon, null);
 
         //options.setResultDeliveryType(ResultDeliveryType.PROGRESSIVE);
+
+        wr = new WriteSDcard();
 
         //Start listening
         recoTransaction = speechSession.recognize(options, recoListener);
@@ -91,6 +98,7 @@ public class SpeechRecognition {
                 results[next++].setBackgroundColor(0x1DDB1600);
             else
                 result.setText(recognition.getText());
+                wr.writeToSDFile(context, "N1:"+recognition.getText());
             //We have received a transcription of the users voice from the server.
         }
 
@@ -183,16 +191,19 @@ public class SpeechRecognition {
         }
     }
 
-    public void setTextViews(TextView result, TextView logs)
+    public void setTextViews(TextView mResult, TextView mLogs, Context mContext)
     {
-        this.logs = logs;
-        this.result = result;
+        this.logs = mLogs;
+        this.result = mResult;
+        this.context = mContext;
+
     }
 
-    public void setTextViews(TextView[] result, TextView logs)
+    public void setTextViews(TextView[] mResult, TextView mLogs, Context mContext)
     {
-        this.logs = logs;
-        this.results = result;
+        this.logs = mLogs;
+        this.results = mResult;
+        this.context = mContext;
     }
 
     /**

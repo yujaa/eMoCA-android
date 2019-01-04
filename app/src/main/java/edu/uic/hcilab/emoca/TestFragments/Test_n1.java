@@ -55,12 +55,13 @@ public class Test_n1 extends android.app.Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_test_n1, container, false);
-        sr.setTextViews((TextView)view.findViewById(R.id.n1_ans), (TextView)view.findViewById(R.id.n1_log));
+        sr.setTextViews((TextView)view.findViewById(R.id.n1_ans), (TextView)view.findViewById(R.id.n1_log), getContext());
         toggleReco = (Button)view.findViewById(R.id.n1_toggle_reco);
         toggleReco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(v == toggleReco) {
+                    wr.writeToSDFile(Test_n1.super.getContext(), "N1:record start");
                     sr.toggleReco();
                 }
             }
